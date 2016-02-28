@@ -2,8 +2,7 @@ library(dplyr)
 library(data.table)
 library(tidyr)
 
-wd <- "/Users/boris.tsekinovsky/Courses/Data Science Specialization/data cleaning/getting-and-cleaning-data-course-project/getting-and-cleaning-data-course-project"
-setwd(wd)
+wd <- getwd()
 
 # Download and unzip
 dataFile = "./data.zip"
@@ -73,6 +72,6 @@ names(data)<-gsub("angle", "Angle", names(data))
 data$Subject <- as.factor(data$Subject)
 tidyData <- aggregate(. ~Subject + ActivityName, data, mean)
 tidyData <- tidyData[order(tidyData$Subject,tidyData$ActivityName),]
-write.table(tidyData, file = "tidy.txt")
+write.table(tidyData, file = "tidy.txt", row.name=FALSE)
 
 
